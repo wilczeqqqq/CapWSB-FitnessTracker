@@ -28,4 +28,11 @@ class UserMapper {
                         userDto.email());
     }
 
+    UserFindByEmailDto toFindByEmailDto(User user) {
+        return new UserFindByEmailDto(
+                    user.getId(),
+                    user.getEmail()
+        );
+    }
+
 }
