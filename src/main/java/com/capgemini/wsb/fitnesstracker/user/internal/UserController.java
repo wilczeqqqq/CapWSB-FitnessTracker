@@ -27,8 +27,8 @@ import java.util.List;
 class UserController {
 
     private final UserServiceImpl userService;
-
     private final UserMapper userMapper;
+
     /**
      * Gets a list of all users.
      *
@@ -37,10 +37,11 @@ class UserController {
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.findAllUsers()
-                          .stream()
-                          .map(userMapper::toDto)
-                          .toList();
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
     }
+
     /**
      * Gets a simplified list of all users.
      *
@@ -53,6 +54,7 @@ class UserController {
                 .map(userMapper::toSimpleDto)
                 .toList();
     }
+
     /**
      * Gets a user by their unique ID.
      *
@@ -66,6 +68,7 @@ class UserController {
                 .map(userMapper::toDto)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
+
     /**
      * Gets users whose email contains the specified partial string, ignoring case.
      *
@@ -79,6 +82,7 @@ class UserController {
                 .map(userMapper::toFindByEmailDto)
                 .toList();
     }
+
     /**
      * Gets users who are older than the specified birthdate.
      *
@@ -86,13 +90,13 @@ class UserController {
      * @return list of {@link UserDto} representing users older than the given date.
      */
     @GetMapping("/older/{time}")
-    public List<UserDto> getUsersOlderThan(@PathVariable("time") String time) {
-        LocalDate parsedDate = LocalDate.parse(time);
-        return userService.getOlderThanBirthdate(parsedDate)
+    public List<UserDto> getUsersOlderThan(@PathVariable("time") LocalDate time) {
+        return userService.getOlderThanBirthdate(time)
                 .stream()
                 .map(userMapper::toDto)
                 .toList();
     }
+
     /**
      * Creates a new user.
      *
@@ -102,8 +106,9 @@ class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public User addUser(@RequestBody UserDto userDto) {
-            return userService.createUser(userMapper.toEntity(userDto));
+        return userService.createUser(userMapper.toEntity(userDto));
     }
+
     /**
      * Deletes a user by their ID.
      *
@@ -113,8 +118,9 @@ class UserController {
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeUser(@PathVariable("userId") Long id) {
-            userService.deleteUser(id);
+        userService.deleteUser(id);
     }
+
     /**
      * Updates an existing user.
      *
@@ -124,6 +130,6 @@ class UserController {
      */
     @PutMapping("/{userId}")
     public User updateUser(@PathVariable Long userId, @RequestBody UserUpdateDto userUpdateDto) {
-            return userService.updateUser(userId, userUpdateDto);
+        return userService.updateUser(userId, userUpdateDto);
     }
 }

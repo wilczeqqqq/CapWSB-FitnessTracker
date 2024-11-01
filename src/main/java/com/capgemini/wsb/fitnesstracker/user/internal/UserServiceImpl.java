@@ -1,6 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserEmailAlreadyExistsException;
 import com.capgemini.wsb.fitnesstracker.user.api.UserNotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import com.capgemini.wsb.fitnesstracker.user.api.UserService;
@@ -31,6 +32,9 @@ class UserServiceImpl implements UserService, UserProvider {
         log.info("Creating User {}", user);
         if (user.getId() != null) { // actually never happens
             throw new IllegalArgumentException("User has already DB ID, update is not permitted!");
+        }
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new UserEmailAlreadyExistsException(user.getEmail());
         }
         return userRepository.save(user);
     }
@@ -102,7 +106,7 @@ class UserServiceImpl implements UserService, UserProvider {
      * @return List of Users with matching email.
      */
     public List<User> getUserByEmailContainingIgnoreCase(final String email){
-        log.info("Fetching Users containing partly email={}", email);
+        log.info("Fetching Users containing emails with part={}", email);
         return userRepository.findByEmailContainingIgnoreCase(email);
     }
     /**
@@ -129,7 +133,7 @@ class UserServiceImpl implements UserService, UserProvider {
                 userUpdateDto.birthdate() != null ? userUpdateDto.birthdate() : user.getBirthdate(),
                 userUpdateDto.email() != null ? userUpdateDto.email() : user.getEmail()
         );
-        user.setId(user.getId());
+        updatedUser.setId(user.getId());
         return updatedUser;
     }
 }
