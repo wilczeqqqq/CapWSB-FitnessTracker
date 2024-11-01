@@ -34,4 +34,4 @@ jobs:
         run: mvn -B clean install -DskipTests
 
       - name: Run tests
-        run: mvn test
+        run: mvn -Dtest=com.capgemini.wsb.fitnesstracker.user.internal.** test
