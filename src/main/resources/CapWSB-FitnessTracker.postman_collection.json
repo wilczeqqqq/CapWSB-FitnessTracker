@@ -3,8 +3,8 @@
 		"_postman_id": "f01958d2-ef17-4ff8-a463-3a0275fdb048",
 		"name": "CapWSB-FitnessTracker",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39237322",
-		"_collection_link": "https://wsb-maniacs-rizz.postman.co/workspace/2935eda5-5133-4614-8bc2-c9e88dc875a6/collection/39237322-f01958d2-ef17-4ff8-a463-3a0275fdb048?action=share&source=collection_link&creator=39237322"
+		"_exporter_id": "25312345",
+		"_collection_link": "https://wsb-maniacs-rizz.postman.co/workspace/WSB-Maniacs-Rizz-Workspace~2935eda5-5133-4614-8bc2-c9e88dc875a6/collection/39237322-f01958d2-ef17-4ff8-a463-3a0275fdb048?action=share&source=collection_link&creator=25312345"
 	},
 	"item": [
 		{
@@ -79,7 +79,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 17,\r\n    \"firstName\": \"Jacob\",\r\n    \"lastName\": \"Johnson\",\r\n    \"birthdate\": \"1996-10-23\",\r\n    \"email\": \"Emma.ashnson@domain.com\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Jacob\",\r\n    \"lastName\": \"Johnson\",\r\n    \"birthdate\": \"1996-10-23\",\r\n    \"email\": \"Emma.ashnson@domain.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -139,7 +139,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"Ethan.Taylor\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -197,7 +197,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"jakub.k@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"polska\",\r\n    \"lastName\": \"gurom\",\r\n    \"email\": \"jakub.k@gmail.com\",\r\n    \"birthdate\": \"2000-01-01\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -205,7 +205,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:7999/v1/users/10",
+							"raw": "http://localhost:7999/v1/users/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -214,7 +214,37 @@
 							"path": [
 								"v1",
 								"users",
-								"10"
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "partialUpdateExistingUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Mariusz\",\r\n    \"lastName\": \"Pudzianowski\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7999/v1/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7999",
+							"path": [
+								"v1",
+								"users",
+								"1"
 							]
 						}
 					},
