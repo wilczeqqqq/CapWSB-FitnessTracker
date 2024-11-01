@@ -38,6 +38,7 @@ class UserServiceImpl implements UserService, UserProvider {
         }
         return userRepository.save(user);
     }
+
     /**
      * Gets a User by its ID.
      *
@@ -49,6 +50,7 @@ class UserServiceImpl implements UserService, UserProvider {
         log.info("Fetching User with ID={}", userId);
         return userRepository.findById(userId);
     }
+
     /**
      * Gets a User by their email.
      *
@@ -60,6 +62,7 @@ class UserServiceImpl implements UserService, UserProvider {
         log.info("Fetching User with email={}", email);
         return userRepository.findByEmail(email);
     }
+
     /**
      * Gets all Users from the repository.
      *
@@ -70,6 +73,7 @@ class UserServiceImpl implements UserService, UserProvider {
         log.info("Fetching all Users");
         return userRepository.findAll();
     }
+
     /**
      * Deletes a User by its ID.
      *
@@ -84,6 +88,7 @@ class UserServiceImpl implements UserService, UserProvider {
         }
         userRepository.deleteById(userId);
     }
+
     /**
      * Updates an existing User.
      *
@@ -99,26 +104,31 @@ class UserServiceImpl implements UserService, UserProvider {
                 .orElseThrow(() -> new UserNotFoundException(userId));
         return userRepository.save(merge(user, userUpdateDto));
     }
+
     /**
      * Gets Users whose email partially matches the given string.
      *
      * @param email email string to search for.
      * @return List of Users with matching email.
      */
+    @Override
     public List<User> getUserByEmailContainingIgnoreCase(final String email){
         log.info("Fetching Users containing emails with part={}", email);
         return userRepository.findByEmailContainingIgnoreCase(email);
     }
+
     /**
      * Gets Users who are older than the specified birthdate.
      *
      * @param birthdate the birthdate to compare.
      * @return List of Users older than the given birthdate.
      */
+    @Override
     public List<User> getOlderThanBirthdate(final LocalDate birthdate) {
         log.info("Fetching Users older than birthdate={}", birthdate);
         return userRepository.findOlderThanBirthdate(birthdate);
     }
+
     /**
      * Merges fields from a UserUpdateDto into an existing User.
      *

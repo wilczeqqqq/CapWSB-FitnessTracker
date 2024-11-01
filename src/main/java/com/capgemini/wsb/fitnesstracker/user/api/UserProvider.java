@@ -1,5 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.user.api;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +27,23 @@ public interface UserProvider {
     /**
      * Retrieves all users.
      *
-     * @return An {@link Optional} containing the all users,
+     * @return A list of all users.
      */
     List<User> findAllUsers();
 
+    /**
+     * Retrieves users whose email contains the specified string, ignoring case.
+     *
+     * @param email The email substring to search for.
+     * @return A list of users whose email contains the specified substring.
+     */
+    List<User> getUserByEmailContainingIgnoreCase(String email);
+
+    /**
+     * Retrieves users who are older than the specified birthdate.
+     *
+     * @param birthdate The birthdate to compare against.
+     * @return A list of users who are older than the specified birthdate.
+     */
+    List<User> getOlderThanBirthdate(LocalDate birthdate);
 }

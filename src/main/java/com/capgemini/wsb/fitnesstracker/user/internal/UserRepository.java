@@ -21,6 +21,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
                         .filter(user -> Objects.equals(user.getEmail(), email))
                         .findFirst();
     }
+
     /**
      * Searches for users whose email contains the specified partial string, ignoring case.
      *
@@ -32,6 +33,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
                 .filter(user -> user.getEmail().toLowerCase().contains(emailPart.toLowerCase()))
                 .toList();
     }
+
     /**
      * Finds users who were born before a specified cutoff date.
      *
