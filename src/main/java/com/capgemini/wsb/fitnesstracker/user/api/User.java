@@ -2,13 +2,18 @@ package com.capgemini.wsb.fitnesstracker.user.api;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
 @Getter
+@Setter // added to not have to create a reflection
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class User {
@@ -18,19 +23,15 @@ public class User {
     @Nullable
     private Long id;
 
-    @Setter
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Setter
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Setter
     @Column(name = "birthdate", nullable = false)
     private LocalDate birthdate;
 
-    @Setter
     @Column(nullable = false, unique = true)
     private String email;
 

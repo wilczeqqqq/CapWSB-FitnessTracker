@@ -34,5 +34,4 @@ class UserMapper {
                     user.getEmail()
         );
     }
-
 }
