@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "f01958d2-ef17-4ff8-a463-3a0275fdb048",
+		"name": "CapWSB-FitnessTracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25312345",
+		"_collection_link": "https://wsb-maniacs-rizz.postman.co/workspace/WSB-Maniacs-Rizz-Workspace~2935eda5-5133-4614-8bc2-c9e88dc875a6/collection/39237322-f01958d2-ef17-4ff8-a463-3a0275fdb048?action=share&source=collection_link&creator=25312345"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "getAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7999/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7999",
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUsersSimple",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7999/v1/users/simple",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7999",
+							"path": [
+								"v1",
+								"users",
+								"simple"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7999/v1/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7999",
+							"path": [
+								"v1",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jacob\",\r\n    \"lastName\": \"Johnson\",\r\n    \"birthdate\": \"1996-10-23\",\r\n    \"email\": \"Emma.ashnson@domain.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7999/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7999",
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7999/v1/users/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7999",
+							"path": [
+								"v1",
+								"users",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserByEmail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7999/v1/users/email?email=Ethan.Taylor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7999",
+							"path": [
+								"v1",
+								"users",
+								"email"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "Ethan.Taylor"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOlderThanGivenDate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7999/v1/users/older/1996-10-28",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7999",
+							"path": [
+								"v1",
+								"users",
+								"older",
+								"1996-10-28"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateExistingUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"polska\",\r\n    \"lastName\": \"gurom\",\r\n    \"email\": \"jakub.k@gmail.com\",\r\n    \"birthdate\": \"2000-01-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7999/v1/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7999",
+							"path": [
+								"v1",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "partialUpdateExistingUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Mariusz\",\r\n    \"lastName\": \"Pudzianowski\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7999/v1/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7999",
+							"path": [
+								"v1",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
