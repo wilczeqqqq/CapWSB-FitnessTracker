@@ -43,13 +43,13 @@ class TrainingController {
                 .toList();
     }
 
-    @Deprecated
-    @GetMapping("/{trainingId}")
-    public TrainingDto getTrainingById(@PathVariable("trainingId") Long id) {
-        return (trainingService.getTraining(id)
-                .map(trainingMapper::fromTraining)
-                .orElseThrow(() -> new TrainingNotFoundException(id)));
-    }
+//    @Deprecated
+//    @GetMapping("/{trainingId}")
+//    public TrainingDto getTrainingById(@PathVariable("trainingId") Long id) {
+//        return (trainingService.getTraining(id)
+//                .map(trainingMapper::fromTraining)
+//                .orElseThrow(() -> new TrainingNotFoundException(id)));
+//    }
 
     @GetMapping("/{userId}")
     public List<TrainingDto> getTrainingsByUserId(@PathVariable("userId") Long id) {
@@ -79,15 +79,12 @@ class TrainingController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Training createTraining(@RequestBody CreateOrUpdateTrainingDto createTrainingDto) {
-        return trainingService.saveTraining(createTrainingDto);
+    public TrainingDto createTraining(@RequestBody CreateOrUpdateTrainingDto createTrainingDto) {
+        return trainingMapper.fromTraining(trainingService.saveTraining(createTrainingDto));
     }
 
     //TODO: implement updateTraining
 
 //    @PutMapping("/{trainingId}")
-//    public User updateUser(@PathVariable Long trainingId, @RequestBody CreateOrUpdateTrainingDto updateTrainingDto) {
-//        return trainingService.updateTraining(trainingId, updateTrainingDto);
-//    }
-
+//    public TrainingDto updateTraining(@PathVariable("trainingId") Long id, @RequestBody CreateOrUpdateTrainingDto createTrainingDto) {}
 }
