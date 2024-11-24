@@ -1,6 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
+import com.capgemini.wsb.fitnesstracker.training.api.TrainingNotFoundException;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingService;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
@@ -45,12 +46,13 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
         return trainingRepository.findByUserId(userId);
     }
 
+    @Override
     public List<Training> findTrainingsEndedAfter(Date time) {
         log.info("Fetching all Trainings ended after {}", time);
         return trainingRepository.findByEndTimeAfter(time);
     }
 
-//    @Override
+    @Override
     public List<Training> findTrainingsByActivityType(ActivityType activityType) {
         log.info("Fetching all Trainings with activity type {}", activityType);
         return trainingRepository.findByActivityType(activityType);
@@ -61,11 +63,30 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
         return trainingRepository.findByUserIdFromLastMonth(userId, startOfLastMonth, endOfLastMonth);
     }
 
+    @Override
     public Training saveTraining(CreateOrUpdateTrainingDto createTrainingDto) {
         User user = userRepository.findById(createTrainingDto.getUserId())
                 .orElseThrow(() -> new UserNotFoundException(createTrainingDto.getUserId()));
         Training training = newTrainingForUserWithTrainingDetails(user, createTrainingDto);
         log.info("Saving Training: {}", training);
+        return trainingRepository.save(training);
+    }
+
+    @Override
+    public Training updateTraining(Long trainingId, CreateOrUpdateTrainingDto updateTrainingDto) {
+        Training training = trainingRepository.findById(trainingId)
+                .orElseThrow(() -> new TrainingNotFoundException(trainingId));
+        if (updateTrainingDto.getUserId() != null) {
+            User user = userRepository.findById(updateTrainingDto.getUserId())
+                    .orElseThrow(() -> new UserNotFoundException(updateTrainingDto.getUserId()));
+            training.setUser(user);
+        }
+        training.setStartTime(updateTrainingDto.getStartTime());
+        training.setEndTime(updateTrainingDto.getEndTime());
+        training.setActivityType(updateTrainingDto.getActivityType());
+        training.setDistance(updateTrainingDto.getDistance());
+        training.setAverageSpeed(updateTrainingDto.getAverageSpeed());
+        log.info("Updating Training: {}", training);
         return trainingRepository.save(training);
     }
 

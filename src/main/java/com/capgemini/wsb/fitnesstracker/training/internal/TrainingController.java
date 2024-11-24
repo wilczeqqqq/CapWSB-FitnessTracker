@@ -1,12 +1,12 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
-import com.capgemini.wsb.fitnesstracker.training.api.TrainingNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,8 +83,8 @@ class TrainingController {
         return trainingMapper.fromTraining(trainingService.saveTraining(createTrainingDto));
     }
 
-    //TODO: implement updateTraining
-
-//    @PutMapping("/{trainingId}")
-//    public TrainingDto updateTraining(@PathVariable("trainingId") Long id, @RequestBody CreateOrUpdateTrainingDto createTrainingDto) {}
+    @PutMapping("/{trainingId}")
+    public TrainingDto updateTraining(@PathVariable("trainingId") Long id, @RequestBody CreateOrUpdateTrainingDto createTrainingDto) {
+        return trainingMapper.fromTraining(trainingService.updateTraining(id, createTrainingDto));
+    }
 }

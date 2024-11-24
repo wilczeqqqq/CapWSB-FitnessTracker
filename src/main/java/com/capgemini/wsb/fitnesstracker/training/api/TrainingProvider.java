@@ -1,5 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.training.api;
 
+import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +26,10 @@ public interface TrainingProvider {
 
     List<Training> findTrainingsForUserWithId(Long userId);
 
+    List<Training> findTrainingsEndedAfter(Date time);
+
+    List<Training> findTrainingsByActivityType(ActivityType activityType);
+
     List<Training> findByUserIdFromLastMonth(Long userId, Date startOfLastMonth, Date endOfLastMonth);
-    // add get methods
+
 }
