@@ -35,4 +35,5 @@ public interface UserService {
      * @throws UserNotFoundException if the User with the given ID does not exist.
      */
     User updateUser(Long userId, UserUpdateDto userDto);
+
 }
