@@ -15,6 +15,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
+
+/**
+ * Component for generating and sending monthly training summary emails.
+ */
 @Component
 @RequiredArgsConstructor
 @EnableAsync
@@ -25,8 +29,11 @@ public class EmailTrainingReport {
     private final TrainingProvider trainingProvider;
     private final EmailSender emailSender;
 
-//    @Scheduled(cron = "0 * * * * *") // every minute *testing purposes*
-    @Scheduled(cron = "0 0 0 1 * ?") // at 00:00 at 1 day of month.
+    /**
+     * Generates and sends a summary of monthly training for all users.
+     * This method is scheduled to run at 00:00 on the 1st day of every month.
+     */
+    @Scheduled(cron = "0 0 0 1 * ?")
     public void generateSummaryOfMonthlyTraining() {
 
         List<User> users = userProvider.findAllUsers();

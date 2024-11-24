@@ -10,7 +10,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * Service implementation for sending emails.
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -19,6 +21,11 @@ public class EmailServiceImpl implements EmailSender {
 
     private final JavaMailSender mailSender;
 
+    /**
+     * Sends an email asynchronously.
+     *
+     * @param emailDto the DTO containing the email details.
+     */
     @Override
     @Async
     public void send(EmailDto emailDto) {
@@ -31,7 +38,7 @@ public class EmailServiceImpl implements EmailSender {
             mailMessage.setText(emailDto.content());
 
             mailSender.send(mailMessage);
-            log.info("Email was send to {}", emailDto.toAddress());
+            log.info("Email was sent to {}", emailDto.toAddress());
 
         } catch (Exception e) {
             log.error("Failed to send email to {}: with message: {}", emailDto.toAddress(), e.getMessage());
