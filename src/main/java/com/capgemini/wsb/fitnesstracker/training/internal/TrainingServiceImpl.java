@@ -55,6 +55,11 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
         log.info("Fetching all Trainings with activity type {}", activityType);
         return trainingRepository.findByActivityType(activityType);
     }
+    @Override
+    public List<Training> findByUserIdFromLastMonth(Long userId, Date startOfLastMonth, Date endOfLastMonth) {
+        log.info("Fetching all Trainings from last month for userId {}", userId);
+        return trainingRepository.findByUserIdFromLastMonth(userId, startOfLastMonth, endOfLastMonth);
+    }
 
     public Training saveTraining(CreateOrUpdateTrainingDto createTrainingDto) {
         User user = userRepository.findById(createTrainingDto.getUserId())

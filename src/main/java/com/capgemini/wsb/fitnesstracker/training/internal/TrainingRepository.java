@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+
 interface TrainingRepository extends JpaRepository<Training, Long> {
 
     default List<Training> findByUserId(Long userId) {
@@ -26,4 +27,17 @@ interface TrainingRepository extends JpaRepository<Training, Long> {
                 .filter(training -> Objects.equals(training.getActivityType(), activityType))
                 .toList();
     }
-}
+
+    default List<Training> findByUserIdFromLastMonth(Long userId, Date startOfLastMonth, Date endOfLastMonth) {
+        return findAll().stream()
+                .filter(training ->
+                        Objects.equals(training.getUser().getId(), userId) &&
+                         !training.getEndTime().before(startOfLastMonth) &&
+                         !training.getEndTime().after(endOfLastMonth)
+                )
+                .toList();
+    }
+
+    }
+
+
